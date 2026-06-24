@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مكتبة السياسات الرقمية - إدارة الجودة</title>
+    
+    <!-- خطوط جوجل العصرية -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f7f9fc;        
+            --text-main: #111111;      
+            --text-muted: #5a626a;     
+            --primary-blue: #214ca6;   
+            --dark-blue: #163575;      
+            --dark-bg: #0b0c10;        
+            --card-bg: #ffffff;        
+            --border-color: #e2e8f0;   
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            /* إضافة خطوط احتياطية مثل Segoe UI و Tahoma لضمان العمل بدون إنترنت */
+            font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: #111111; 
+            background: radial-gradient(circle at center, #1a1a1a 0%, var(--dark-bg) 100%); 
+            color: #ffffff;
+            padding: 60px 20px 40px 20px;
+            text-align: center;
+            border-bottom: 5px solid var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .logo-box {
+            color: var(--primary-blue);
+            margin-bottom: 25px;
+            display: inline-block;
+        }
+
+        .logo-box .hospital-title {
+            font-size: 1.3rem;
+            font-weight: 400;
+            line-height: 1;
+            margin-bottom: -5px;
+            letter-spacing: 2px;
+            color: #ffffff; 
+        }
+
+        .logo-box .main-brand {
+            font-family: 'Reem Kufi', 'Cairo', serif;
+            font-size: 4.5rem;
+            font-weight: 700;
+            line-height: 0.9;
+            margin: 0;
+            transform: scaleY(1.05);
+            text-shadow: 0 4px 15px rgba(33, 76, 166, 0.3); 
+        }
+
+        .logo-box .quality-dept {
+            font-size: 1.8rem;
+            font-weight: 900;
+            line-height: 1;
+            margin-top: 5px;
+            color: #e2e8f0; 
+        }
+
+        .header-desc {
+            max-width: 600px;
+            margin: 15px auto 0 auto;
+            color: #a0aec0; 
+            font-size: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: -20px auto 0 auto; 
+            padding: 0 20px;
+        }
+
+        .files-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .file-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+        }
+
+        .file-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px -5px rgba(33, 76, 166, 0.15);
+            border-color: #bcd1ec;
+        }
+
+        .file-info {
+            flex-grow: 1;
+            padding-left: 25px;
+        }
+
+        .file-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .file-description {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        .download-btn {
+            display: inline-block;
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background-color 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .download-btn:hover {
+            background-color: var(--dark-blue);
+        }
+
+        @media (max-width: 650px) {
+            header { padding: 40px 15px 30px 15px; }
+            .logo-box .main-brand { font-size: 3.2rem; }
+            .logo-box .quality-dept { font-size: 1.4rem; }
+            .file-card { flex-direction: column; align-items: flex-start; gap: 20px; }
+            .file-info { padding-left: 0; }
+            .download-btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-box">
+            <div class="hospital-title">مستشفى</div>
+            <h1 class="main-brand">صيدناوي</h1>
+            <div class="quality-dept">إدارة الجودة</div>
+        </div>
+        <p class="header-desc">مكتبة السياسات الرقمية. يمكنك تصفح وتحميل ملفات الـ PDF مباشرة.</p>
+    </header>
+
+    <div class="container">
+        <main class="files-list">
+
+            <!-- ملف تجريبي 1 (رابط حقيقي يعمل للتجربة) -->
+            <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">سياسة تعريف المريض (GSR.01)</div>
+                    <div class="file-description">التاكد من تعريف المريض ب الاسم الرباعي و الرقم الموحد قبل اي اجراء من خلال اسورة اليد</div>
+                </div>
+                <!-- وضعت لك رابط لملف PDF حقيقي للتأكد من عمل الزر -->
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_01.pdf" target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+
+            <!-- ملف تجريبي 2 -->
+            <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">سياسة الاوامر الشفهية و الهاتفية (GSR.02)</div>
+                    <div class="file-description"> الاستماع للامر جيدا, تسجيل الامر, اعادة ترديد الامر للتاكيد, و من ثم التنفيذ</div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_02.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+            <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">سياسة النتائج الحرجة (GSR.03)</div>
+                    <div class="file-description"> سلسلة التبليغ بالنتائج الحرجة بدأ من مكتشف النتيجة وصولا الى الطبيب المعالج لاتخاذ قرار بما يخص نتيجة المريض, في مدة لا تتخطى 15 دقيقة</div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR.03.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">سياسة التسليم و التسلم (GSR.04)</div>
+                    <div class="file-description"> اسس التسليم و التسلم حسب مبادئ ISBAR و التوثيق في نماذج الملف الطبي</div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_04.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">سياسة تقييم اخطار السقوط و تفاديها  (GSR.05)</div>
+                    <div class="file-description">   تقييم المرضى العرضى للسقوط و تمييزهم ب حرف F باسورة اليد , و اخذ الاحتياطات</div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_05.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">سياسة تقييم اخطار قرح الفراش و تفاديها  (GSR.06)</div>
+                    <div class="file-description">   تقييم المرضى العرضى لقرح الفراش و اعادة التقييم مع اتخاذ كافة الاجراءات الاحتزازية</div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_06.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">سياسة تقييم اخطار الجلطات و تفاديها  (GSR.07)</div>
+                    <div class="file-description">   تقييم المرضى فور دخول المستشفى, تحديد البروتوكول المتبع حسب التقييم و اعادة التقييم</div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_07.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">سياسة الانذارات الحرجة  (GSR.08)</div>
+                    <div class="file-description">   الانذارات المرئية او المسموعة و كيفية التعامل معها</div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_08.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">سياسة تفادي التوصيل غير السليم  (GSR.09)</div>
+                    <div class="file-description">   تتبع الوصلات و تعريفها و تفادي الاخطاء </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_09.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">سياسة الاستجابة السريعة للحالات الحرجة   (GSR.10)</div>
+                    <div class="file-description"> التدخل السريع قبل تدهور الحالة  </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_10.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">سياسة  الانعاش القلبي الرئوي    (GSR.11)</div>
+                    <div class="file-description"> التعامل مع حالات توقف القلب و التنفس  </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_11.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">برنامج امان المعامل    (GSR.13)</div>
+                    <div class="file-description"> برنامج امان للعاملين داخل المعمل و كيفية التعامل مع المواد الخطرة و النفايات  </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_13.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">وضع علامة على الموضع الجراحي  (GSR.14)</div>
+                    <div class="file-description"> وضع علامة على موضع الجراحة قبل اجراء العملية, و التاكد من تواجد العلامة عند نزول العمليات  </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_14.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">القائمة التفقدية قبل العمليات الجراحية    (GSR.15)</div>
+                    <div class="file-description"> القائمة التفقدية للعملية الجراحية الامنة, استلام المريض داخل العمليات </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_15.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">   الوقت المستقطع و خروج المريض من العمليات   (GSR.16)</div>
+                    <div class="file-description">  Time Out قبل الشق الجراحي, Sign out قبل خروج المريض  </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_16.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">الوقاية من ترك الادوات     (GSR.17)</div>
+                    <div class="file-description"> اجراءات المتخذة لتفادي ترك الادوات بعد انهاء العملية  </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_17.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">التوافق الدوائي    (GSR.18)</div>
+                    <div class="file-description"> عملية توفيق ادوية المريض في مختلف مراحل اقامته قبل الدخول و اثناء الاقامة و بعد الخروج  </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_18.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">تخزين الدوائي  (GSR.19)</div>
+                    <div class="file-description"> اسس تخزين الدواء ب مختلف انحاء المستشفى  </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_19.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">التعامل مع الادوية و المحاليل عالية الخطورة و عالية التركيز    (GSR.20)</div>
+                    <div class="file-description"> الادوية و المحاليل عالية الخطورة يتم تمييزها بالاحمر, و الادوية و المحاليل عالية التركيز يتم تمييزها بالازرق  </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_20.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">  التعامل مع الادوية و المحاليل المتشابهة في الشكل او النطق (GSR.21)</div>
+                    <div class="file-description"> يتم تمييز التشابه في الشكل باللون الاخضر, و التشابه في النطق باللون الاصفر  </div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_21.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+                          <div class="file-card">
+                <div class="file-info">
+                    <div class="file-name">التحكم في استخدام الاختصارات و الرموز الطبية   (GSR.29)</div>
+                    <div class="file-description"> كيفية كتابة الاختصارات حسب القائمة المعتمدة</div>
+                </div>
+                <a href="https://basel-pixel.github.io/SednawyGSR/GSR_29.pdf"  target="_blank" class="download-btn">عرض السياسة</a>
+            </div>
+        </main>
+    </div>
+
+</body>
+</html>
