@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة السياسات الرقمية - إدارة الجودة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--bg-color:#f7f9fc;--text-main:#111;--text-muted:#5a626a;--primary-blue:#214ca6;--dark-blue:#163575;--dark-bg:#0b0c10;--card-bg:#fff;--border-color:#e2e8f0}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Cairo','Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg-color);color:var(--text-main);line-height:1.6;padding-bottom:60px}
+header{background:radial-gradient(circle at center,#1a1a1a 0%,var(--dark-bg) 100%);color:#fff;padding:60px 20px 40px;text-align:center;border-bottom:5px solid var(--primary-blue);box-shadow:0 10px 30px rgba(0,0,0,.15)}
+.logo-box{margin-bottom:25px;display:inline-block}
+.hospital-title{font-size:1.3rem;font-weight:400;line-height:1;margin-bottom:-5px;letter-spacing:2px;color:#fff}
+.main-brand{font-family:'Reem Kufi','Cairo',serif;font-size:4.5rem;font-weight:700;line-height:.9;color:var(--primary-blue);transform:scaleY(1.05);text-shadow:0 4px 15px rgba(33,76,166,.3)}
+.quality-dept{font-size:1.8rem;font-weight:900;line-height:1;margin-top:5px;color:#e2e8f0}
+.header-desc{max-width:600px;margin:15px auto 0;color:#a0aec0;font-size:1rem;border-top:1px solid rgba(255,255,255,.1);padding-top:15px}
+.container{max-width:850px;margin:-20px auto 0;padding:0 20px}
+
+/* خانة البحث */
+.search-wrap{position:sticky;top:0;z-index:10;background:var(--bg-color);padding:35px 0 14px}
+.search-box{position:relative}
+.search-box input{width:100%;font-family:inherit;font-size:1.05rem;padding:15px 50px 15px 48px;border:2px solid var(--border-color);border-radius:12px;background:#fff;color:var(--text-main);box-shadow:0 4px 6px -1px rgba(0,0,0,.05);transition:border-color .2s,box-shadow .2s}
+.search-box input:focus{outline:none;border-color:var(--primary-blue);box-shadow:0 0 0 4px rgba(33,76,166,.12)}
+.search-box .icon{position:absolute;right:16px;top:50%;transform:translateY(-50%);width:22px;height:22px;color:var(--text-muted);pointer-events:none}
+.clear-btn{position:absolute;left:12px;top:50%;transform:translateY(-50%);border:0;background:#e9eef6;color:var(--text-muted);width:28px;height:28px;border-radius:50%;font-size:1.1rem;line-height:1;cursor:pointer;display:none}
+.clear-btn:hover{background:#d8e1ef}
+.result-count{font-size:.9rem;color:var(--text-muted);margin-top:8px;min-height:1.4em}
+
+/* المجموعات */
+.group{margin-top:28px}
+.group-title{display:flex;align-items:center;gap:12px;padding:18px 22px;background:var(--card-bg);border:1px solid var(--border-color);border-right:5px solid var(--primary-blue);border-radius:12px;cursor:pointer;list-style:none;user-select:none;box-shadow:0 4px 6px -1px rgba(0,0,0,.05);transition:background-color .2s,border-color .2s}
+.group-title::-webkit-details-marker{display:none}
+.group-title:hover{background:#f0f5ff;border-color:#bcd1ec;border-right-color:var(--primary-blue)}
+.group-title:focus-visible{outline:3px solid rgba(33,76,166,.35);outline-offset:2px}
+.group-title h2{font-size:1.3rem;font-weight:900;color:var(--dark-blue);flex-grow:1}
+.group-title .count{background:var(--primary-blue);color:#fff;font-size:.85rem;font-weight:700;padding:2px 12px;border-radius:20px}
+.group-title .arrow{width:22px;height:22px;color:var(--primary-blue);transition:transform .25s ease;flex-shrink:0}
+.group[open]>.group-title .arrow{transform:rotate(180deg)}
+.group[open]>.group-title{border-bottom-left-radius:0;border-bottom-right-radius:0;background:#f0f5ff}
+.group .files-list{padding:20px;background:#eef2f9;border:1px solid var(--border-color);border-top:0;border-radius:0 0 12px 12px}
+.files-list{display:flex;flex-direction:column;gap:20px}
+.file-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:12px;padding:24px;display:flex;justify-content:space-between;align-items:center;transition:all .3s ease;box-shadow:0 4px 6px -1px rgba(0,0,0,.05)}
+.file-card:hover{transform:translateY(-4px);box-shadow:0 12px 20px -5px rgba(33,76,166,.15);border-color:#bcd1ec}
+.file-info{flex-grow:1;padding-left:25px}
+.file-name{font-size:1.2rem;font-weight:700;margin-bottom:6px}
+.file-description{font-size:.95rem;color:var(--text-muted)}
+.download-btn{display:inline-block;background:var(--primary-blue);color:#fff;text-decoration:none;padding:12px 24px;border-radius:8px;font-weight:600;font-size:.95rem;transition:background-color .2s;white-space:nowrap}
+.download-btn:hover{background:var(--dark-blue)}
+.actions{display:flex;gap:10px;flex-shrink:0}
+.download-btn.alt{background:#fff;color:var(--primary-blue);border:2px solid var(--primary-blue);padding:10px 20px}
+.download-btn.alt:hover{background:#eef3ff}
+.badge{display:inline-block;font-size:.75rem;font-weight:700;padding:1px 10px;border-radius:20px;margin-right:10px;vertical-align:middle;color:#fff}
+.badge.new{background:#16a34a}.badge.upd{background:#d97706}
+mark{background:#fff3b0;color:inherit;border-radius:3px;padding:0 2px}
+.empty{display:none;text-align:center;color:var(--text-muted);padding:50px 10px;font-size:1.1rem}
+
+@media (max-width:650px){
+header{padding:40px 15px 30px}
+.main-brand{font-size:3.2rem}.quality-dept{font-size:1.4rem}
+.file-card{flex-direction:column;align-items:flex-start;gap:20px}
+.file-info{padding-left:0}
+.actions{width:100%}.download-btn{flex:1;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-box">
+    <div class="hospital-title">مستشفى</div>
+    <h1 class="main-brand">صيدناوي</h1>
+    <div class="quality-dept">إدارة الجودة</div>
+  </div>
+  <p class="header-desc">مكتبة السياسات الرقمية. يمكنك تصفح وتحميل ملفات الـ PDF مباشرة.</p>
+</header>
+
+<div class="container">
+  <div class="search-wrap">
+    <div class="search-box">
+      <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="ابحث باسم السياسة أو الكود (مثال: GSR.05 أو السقوط)" autocomplete="off" aria-label="بحث في السياسات">
+      <button class="clear-btn" id="clear" aria-label="مسح البحث">×</button>
+    </div>
+    <div class="result-count" id="count"></div>
+  </div>
+
+  <main id="app">
+    <details class="group" data-group="GSR">
+      <summary class="group-title"><h2>معايير سلامة المرضى (GSR)</h2><span class="count"></span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="files-list"></div>
+    </details>
+    <details class="group" data-group="EQR">
+      <summary class="group-title"><h2>معايير جودة الرعاية (EQR)</h2><span class="count"></span><svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="files-list"></div>
+    </details>
+    <div class="empty" id="empty">لا توجد نتائج مطابقة. جرّب كلمة أو كود آخر.</div>
+  </main>
+</div>
+
+<script>
+/* ===== إعدادات ===== */
+const BADGE_DAYS  = 30;   // مدة ظهور شارة "جديد/محدّث" بالأيام من تاريخ السياسة
+const BASE = "https://basel-pixel.github.io/SednawyGSR/";
+/* لإضافة سياسة: [الكود, الاسم, الوصف, اسم الملف]
+   لإظهار شارة: أضف في آخر السطر تاريخ و نوع: "2026-11-20","new"  (جديد)  أو  "2026-11-20","upd"  (محدّث)
+   مثال: ["GSR.30","اسم","وصف","GSR_30.pdf","2026-11-20","new"]  - الشارة تختفي تلقائياً بعد BADGE_DAYS يوم */
+const POLICIES = [
+ ["GSR.01","سياسة تعريف المريض","التاكد من تعريف المريض ب الاسم الرباعي و الرقم الموحد قبل اي اجراء من خلال اسورة اليد","GSR_01_01.pdf"],
+ ["GSR.02","سياسة الاوامر الشفهية و الهاتفية","الاستماع للامر جيدا, تسجيل الامر, اعادة ترديد الامر للتاكيد, و من ثم التنفيذ","GSR_02.pdf"],
+ ["GSR.03","سياسة النتائج الحرجة","سلسلة التبليغ بالنتائج الحرجة بدأ من مكتشف النتيجة وصولا الى الطبيب المعالج لاتخاذ قرار بما يخص نتيجة المريض, في مدة لا تتخطى 15 دقيقة","GSR.03.pdf"],
+ ["GSR.04","سياسة التسليم و التسلم","اسس التسليم و التسلم حسب مبادئ ISBAR و التوثيق في نماذج الملف الطبي","GSR_04.pdf"],
+ ["GSR.05","سياسة تقييم اخطار السقوط و تفاديها","تقييم المرضى العرضى للسقوط و تمييزهم ب حرف F باسورة اليد , و اخذ الاحتياطات","GSR_05.pdf"],
+ ["GSR.06","سياسة تقييم اخطار قرح الفراش و تفاديها","تقييم المرضى العرضى لقرح الفراش و اعادة التقييم مع اتخاذ كافة الاجراءات الاحتزازية","GSR_06.pdf"],
+ ["GSR.08","سياسة الانذارات الحرجة","الانذارات المرئية او المسموعة و كيفية التعامل معها","GSR_08.pdf"],
+ ["GSR.09","سياسة تفادي التوصيل غير السليم","تتبع الوصلات و تعريفها و تفادي الاخطاء","GSR_09.pdf"],
+ ["GSR.10","سياسة الاستجابة السريعة للحالات الحرجة","التدخل السريع قبل تدهور الحالة","GSR_10.pdf"],
+ ["GSR.11","سياسة الانعاش القلبي الرئوي","التعامل مع حالات توقف القلب و التنفس","GSR_11.pdf"],
+ ["GSR.12","برنامج امان الاشعة","برنامج امان للعاملين و المنتفعين داخل قسم الاشعة","GSR_12.pdf"],
+ ["GSR.13","برنامج امان المعامل","برنامج امان للعاملين داخل المعمل و كيفية التعامل مع المواد الخطرة و النفايات","GSR_13.pdf"],
+ ["GSR.14","وضع علامة على الموضع الجراحي","وضع علامة على موضع الجراحة قبل اجراء العملية, و التاكد من تواجد العلامة عند نزول العمليات","GSR_14.pdf"],
+ ["GSR.15","القائمة التفقدية قبل العمليات الجراحية","(Sign in) القائمة التفقدية للعملية الجراحية الامنة, استلام المريض داخل العمليات","GSR_15.pdf"],
+ ["GSR.16","الوقت المستقطع و خروج المريض من العمليات","Time Out قبل الشق الجراحي, Sign out قبل خروج المريض","GSR_16.pdf"],
+ ["GSR.17","الوقاية من ترك الادوات","اجراءات المتخذة لتفادي ترك الادوات بعد انهاء العملية","GSR_17.pdf"],
+ ["GSR.18","التوافق الدوائي","عملية توفيق ادوية المريض في مختلف مراحل اقامته قبل الدخول و اثناء الاقامة و بعد الخروج","GSR_18.pdf"],
+ ["GSR.19","تخزين دواء","اسس تخزين الدواء ب مختلف انحاء المستشفى","GSR_19.pdf"],
+ ["GSR.20","التعامل مع الادوية و المحاليل عالية الخطورة و عالية التركيز","الادوية و المحاليل عالية الخطورة يتم تمييزها بالاحمر, و الادوية و المحاليل عالية التركيز يتم تمييزها بالازرق","GSR_20.pdf"],
+ ["GSR.21","التعامل مع الادوية و المحاليل المتشابهة في الشكل او النطق","يتم تمييز التشابه في الشكل باللون الاخضر, و التشابه في النطق باللون الاصفر","GSR_21.pdf"],
+ ["GSR.22","غسيل الايدي","انواع غسيل الايدي و الكيفية","GSR_22.pdf"],
+ ["GSR.29","التحكم في استخدام الاختصارات و الرموز الطبية","كيفية كتابة الاختصارات حسب القائمة المعتمدة","GSR_29.pdf"],
+ ["EQR.01","حقوق المرضى و ذويهم","سياسة تنص على حقوق المرضى الواجب الالتزام بها من قبل جميع العاملين بالمستشفى","EQR_01.pdf"],
+ ["EQR.02","التثقيف الصحي للمرضى و ذويهم","اجراءات التثقيف الصحي للمرضى","EQR_02.pdf"],
+ ["EQR.03","الموافقة المستنيرة","اجراء اخذ موافقة المريض قبل الاجراءات الطبية","EQR_03.pdf"],
+ ["EQR.04","ادارة الشكاوى و المقترحات","اجراءات التعامل مع الشكاوى و المقترحات","EQR04.pdf"],
+ ["EQR.05","اتاحة الخدمات قبل الدخول","طريقة التعامل مع المرضى قبل التسجيل بنظام الدخول للمستشفى, و ايضا توضيح للخدمات المقدمة","EQR_05.pdf"],
+ ["EQR.06","الوصول الى وحدات الرعاية المتخصصة","معايير دخول و خروج الوحدات الخاصة","EQR06.pdf"],
+ ["EQR.11","تقييد المرضى","معايير تقييد المرضى و كيفية الاعادة التقييم و التوثيق","EQR11.pdf"],
+ ["EQR.15","توثيق تقرير العملية","كتابة تقرير العملية","EQR_15.pdf"],
+ ["EQR.16","تقييم الحالة الفسيولوجية بواسطة التخدير","متابعة الوظائف الحيوية للمرضى اثناء التخدير","EQR16.pdf"],
+ ["EQR.37","لجنة الجودة و امان و سلامة المرضى","هيكل تحسين الاداء و ضمان سلامة المرضى و إدارة المخاطر","EQR.37.pdf"],
+ ["EQR.38","الابلاغ عن الاحداث الغير متوقعة","ما هو الOVR , و ما كيفيته","EQR.38.pdf"],
+ ["EQR.39","الاحداث الجسيمة و التعامل معها","كيف تتعامل ادارة المستشفى مع الاحداث الجسيمة","EQR.39.pdf"]
+];
+
+/* توحيد الحروف العربية لتجاهل الفروق (أ/ا/إ، ة/ه، ى/ي، التشكيل) */
+const norm = s => s.toLowerCase()
+  .replace(/[\u064B-\u065F\u0670\u0640]/g,"")
+  .replace(/[أإآ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه")
+  .replace(/[\u0660-\u0669]/g,d=>d.charCodeAt(0)-0x660)
+  .replace(/[._\-\s]+/g," ").trim();
+
+const esc = s => s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+function badge(date,type){
+  if(!date||!type) return "";
+  const age=(Date.now()-new Date(date))/864e5;
+  if(isNaN(age)||age>BADGE_DAYS) return "";
+  return type==="new" ? '<span class="badge new">جديد</span>' : '<span class="badge upd">محدّث</span>';
+}
+
+async function download(btn,url,filename){
+  const old=btn.textContent; btn.textContent="جاري التحميل...";
+  try{
+    const r=await fetch(url); if(!r.ok) throw 0;
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(await r.blob()); a.download=filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  }catch(e){ window.open(url,"_blank"); }
+  btn.textContent=old;
+}
+
+const cards = POLICIES.map(([code,name,desc,file,date,type])=>{
+  const url = BASE+file;
+  const el = document.createElement("div");
+  el.className = "file-card";
+  el.innerHTML = `<div class="file-info"><div class="file-name"><span class="t"></span>${badge(date,type)}</div><div class="file-description"></div></div>
+    <div class="actions">
+      <a href="${url}" target="_blank" rel="noopener" class="download-btn view">عرض السياسة</a>
+      <a href="${url}" class="download-btn alt dl">تحميل</a>
+    </div>`;
+  el.querySelector(".dl").addEventListener("click",e=>{
+    e.preventDefault(); download(e.currentTarget,url,`${code} ${name}.pdf`);
+  });
+  document.querySelector(`[data-group="${code.slice(0,3)}"] .files-list`).appendChild(el);
+  return {el, code, name, desc, hay: norm(`${code} ${name} ${desc}`),
+          nameEl: el.querySelector(".t"), descEl: el.querySelector(".file-description")};
+});
+
+function highlight(text, terms){
+  let out = esc(text);
+  terms.forEach(t=>{
+    if(!t) return;
+    // تمييز النص الأصلي بمحاولة مطابقة مباشرة (بدون تطبيع)
+    const re = new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),"gi");
+    out = out.replace(re,m=>`<mark>${m}</mark>`);
+  });
+  return out;
+}
+
+const q = document.getElementById("q"), clear = document.getElementById("clear"),
+      count = document.getElementById("count"), empty = document.getElementById("empty");
+
+let wasSearching=false;
+function render(){
+  const raw = q.value.trim(), terms = norm(raw).split(" ").filter(Boolean);
+  clear.style.display = raw ? "block" : "none";
+  let total = 0;
+  cards.forEach(c=>{
+    const show = terms.every(t=>c.hay.includes(t));
+    c.el.style.display = show ? "" : "none";
+    if(show){
+      total++;
+      const rawTerms = raw.split(/\s+/);
+      c.nameEl.innerHTML = highlight(`${c.name} (${c.code})`, rawTerms);
+      c.descEl.innerHTML = highlight(c.desc, rawTerms);
+    }
+  });
+  document.querySelectorAll(".group").forEach(g=>{
+    const n = [...g.querySelectorAll(".file-card")].filter(e=>e.style.display!=="none").length;
+    g.style.display = n ? "" : "none";
+    g.querySelector(".count").textContent = n;
+    if(raw) g.open = n>0; else if(wasSearching) g.open = false;
+  });
+  empty.style.display = total ? "none" : "block";
+  wasSearching = !!raw;
+  count.textContent = raw ? `عدد النتائج: ${total}` : `إجمالي السياسات: ${cards.length}`;
+}
+q.addEventListener("input", render);
+clear.addEventListener("click", ()=>{q.value="";render();q.focus();});
+render();
+</script>
+</body>
+</html>
